@@ -6,15 +6,30 @@
           <i class="fa fa-angle-left fa-2x" @click="$router.go(-1)"></i>
         </li>
         <li>购物车</li>
-        <li><router-link to="/cartedit">编辑</router-link></li>
+        <li @click="editf">编辑</li>
       </ul>
     </header>
-    <div class="sigle" v-for="(x) in this.cartinfo">
+    <div class="sigle" v-for="(x) in this.cartinfo" :key="x.index">
          <input class="radio" type="checkbox" v-model="x.checked"/>
          <img :src="x.pic"/>
-         <span>{{x.name}}</span>
-         <span> ￥{{x.price}}</span>
-         <input type="text"  v-model="x.num" :placeholder="x.num" width="40px">
+         <div class="right">
+            <div class="prod-title">{{x.name}}</div>
+            <div class="pord-info">
+            <span class="prod-price"> ￥{{x.price}}</span>
+         <input  type="text"  v-model="x.num" :placeholder="x.num" width="40px">
+             <ul v-if="edit">
+              <li @click="minus(x)">
+                <i class="fa fa-minus"></i>
+              </li>
+              <li><input type="text" v-model="x.num"></li>
+              <li @click="plus(x)">
+                <i class="fa fa-plus"></i>
+              </li>
+            </ul>
+          </div>
+         </div>
+    </div>
+    <div class="rem">
     </div>
     <footer>
         <input type="checkbox" @click="allCheck">
@@ -23,6 +38,7 @@
         <div>共 {{this.allNum}} 件</div>
         <div class="all">结算</div>
     </footer>
+    
   </div>
 </template>
 
@@ -32,6 +48,7 @@ export default {
   data() {
     return {
         allChecked:flase,
+        edit:false
     };
   },
   computed: {
@@ -39,6 +56,10 @@ export default {
     ...mapGetters(['allNum','allPrice'])
   },
   methods:{
+    editf(){
+      this.edit=!this.edit;
+      alert(this.edit);
+    },
       allCheck(){
           this.allChecked=!this.allChecked;
           this.cartinfo.forEach(element => {
@@ -69,6 +90,27 @@ ul {
     height:100px;
     overflow: hidden;
 }
+.right{
+  display:inline-block;
+}
+.pord-info{
+  display:inline-block;
+}
+.prod-title{
+  margin-bottom: 40px;
+}
+.prod-price{
+  color:red;
+  float:left;
+}
+.pord-info>input{
+  display:block;
+  width:30px;
+  float:right;
+  margin-left:20px;
+  text-align: center;
+}
+
 img{
     width:30%;
     border-radius: 10%;

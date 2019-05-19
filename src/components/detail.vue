@@ -180,6 +180,9 @@ export default {
 </script>
 
 <style scoped>
+#detail{
+  font-size: 1rem;
+}
 #back {
   margin-left: 10px;
 }
@@ -203,12 +206,12 @@ footer > ul {
   min-width:364px;
 }
 .buy {
-  padding-left: 23px;
-  padding-right: 23px;
+  padding-left: 2rem;
+  padding-right: 2rem;
   text-align: center;
   background: red;
   color: #fff;
-  height: 32px;
+  height: 2rem;
 }
 .info-bar {
   display: flex;

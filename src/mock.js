@@ -55,7 +55,7 @@ const one = {
 Mock.mock('/news/index', produceNewsData)
 Mock.mock('/news/detail', one)
 let list = [];
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 60; i++) {
   list[i] = {
     title: Random.csentence(5, 8), //  Random.csentence( min, max )
     pic: Random.dataImage('300x300', 'mock的图片'), // Random.dataImage( size, text ) 生成一段随机的 Base64 图片编码
@@ -83,6 +83,24 @@ for (let i = 0; i < 30; i++) {
       checked: 'false',
       deleCheck: 'false'
     })
+  }
+}
+let row=15;
+for (let index = 1; index <= 4; index++) {
+  let params = {
+      'code': 0,
+      'msg': '',
+      'data': []
+  }
+  if (index < 4) {
+      Mock.mock(`/list?page=${index}`, function () {
+          params.data = listJson.slice((index - 1) * rows, index * rows)
+          return params
+      })
+  } else {
+      Mock.mock(`/list?page=${index}`, function () {
+          return params
+      })
   }
 }
 Mock.mock('/list',list)

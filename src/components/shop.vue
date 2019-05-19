@@ -36,9 +36,7 @@
             <img v-bind:src="x.pic" width="20%" height="20%" alt>
             <section>
               <span class="tit">{{x.title}}</span>
-              <br>
               <span>{{x.author}}</span>
-              <span>{{x.id[index]}}</span>
             </section>
           </router-link>
         </article>
@@ -65,7 +63,9 @@
           </router-link>
         </article>
       </div>
-      <div class="shop-list">
+      
+    </div>
+    <div class="shop-list">
         <div class="single-list" v-for="item in list" :key="item.index">
           <router-link :to="{ name:'detail', query: { id : item.id  }}">
             <img v-lazy="item.pic">
@@ -76,7 +76,7 @@
           </router-link>
         </div>
       </div>
-    </div>
+  
   </div>
 </template>
 
@@ -109,19 +109,19 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+
 #shopheader {
+  width:100%;
   z-index: 100;
   background: #fff;
-  width: 100%;
   position: fixed;
   top: 0;
-
   ul {
     list-style: none;
+    min-height:60px;
     display: flex;
     justify-content: space-around;
     padding: 4px 10px;
-
     #input-box {
       background: #aaaaaa;
       padding: 5px;
@@ -131,14 +131,12 @@ export default {
       #Input {
         background: #aaaaaa;
         border: none;
-        width: 70%;
         padding: 9px;
       }
     }
 
     .fa-paper-plane {
       padding: 30px 30px 0 0;
-
       &:after {
         content: '长沙市';
         display: inline-block;
@@ -147,14 +145,17 @@ export default {
         top: 20px;
       }
     }
+    .fa-paper-plane{
+      padding-right:1rem;
+    }
   }
 }
 
 #taste-new {
   margin-top: 60px;
-  padding: 10px;
-  width: 100%;
-
+  padding:0.3rem;
+  box-sizing: border-box;
+  width: 10rem;
   .bar {
     overflow: hidden;
 
@@ -172,38 +173,35 @@ export default {
   }
 
   .show {
-    height: 250px;
+    height: 7rem;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-
+    font-size:16px;
     .single {
       display: inline-block;
-      width: 80%;
-      height: 80px;
-
+      width: 7rem;
+      height: 2.2rem;
       section {
         display: inline-block;
-        position: relative;
-        top: -38px;
+        margin-top:1rem;
       }
-
       img {
-        width: 80px;
-        height: 80px;
-        border-radius: 20%;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.2rem;
       }
     }
   }
 }
 
 .single-list {
-  width: 50%;
+  width: 5rem;
   display: inline-block;
   font: 12px;
-
+  box-sizing: border-box;
   img {
-    width: 80%;
+    width:4rem;
   }
 
   .price {

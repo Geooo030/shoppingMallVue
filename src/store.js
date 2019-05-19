@@ -34,7 +34,7 @@ export default new Vuex.Store({
     allNum:state=>{
       let count=0;
       state.cartinfo.forEach((item)=>{
-        count+=item.num;
+        count+=item.num-0;
       });
       return count;
     },
