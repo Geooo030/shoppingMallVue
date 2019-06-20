@@ -80,8 +80,8 @@ for (let i = 0; i < 60; i++) {
       price: Random.integer(0, 100),
       pic: Random.dataImage('300x300', 'mock的图片'),
       color: '#888',
-      checked: 'false',
-      deleCheck: 'false'
+      checked: false,
+      deleCheck: false
     })
   }
 }

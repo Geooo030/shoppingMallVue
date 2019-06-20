@@ -28,6 +28,9 @@ export default new Vuex.Store({
           state.cartinfo.splice(index,1);
         }
       })
+    },
+    minus(state,x){
+      console.log(X);
     }
   },
   getters: {

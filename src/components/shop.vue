@@ -3,7 +3,7 @@
     <div id="shopheader">
       <ul>
         <li>
-          <i class="fa fa-paper-plane fa-1x"></i>
+          <i class="fa fa-paper-plane"></i>
         </li>
         <!-- <li><i class="fa fa-plus fa-2x"></i></li> -->
         <li id="input-box">
@@ -30,13 +30,14 @@
         </div>
         <button>查看全部</button>
       </div>
+    <!-- <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore"> -->
       <div class="show">
         <article class="single" v-for="(x) in this.index.slice(0,3)" :key="x.index">
           <router-link :to="{ name:'detail', query: { id : x.id  }}">
             <img v-bind:src="x.pic" width="20%" height="20%" alt>
             <section>
               <span class="tit">{{x.title}}</span>
-              <span>{{x.author}}</span>
+              <p>{{x.author}}</p>
             </section>
           </router-link>
         </article>
@@ -47,7 +48,7 @@
             <section>
               <span class="tit">{{x.title}}</span>
               <br>
-              <span>{{x.author}}</span>
+              <p>{{x.author}}</p>
             </section>
           </router-link>
         </article>
@@ -58,11 +59,12 @@
             <section>
               <span class="tit">{{x.title}}</span>
               <br>
-              <span>{{x.author}}</span>
+              <p>{{x.author}}</p>
             </section>
           </router-link>
         </article>
       </div>
+    <!-- </mt-loadmore> -->
       
     </div>
     <div class="shop-list">
@@ -71,12 +73,11 @@
             <img v-lazy="item.pic">
             <!-- <img :src="item.pic" alt=""> -->
             <p>{{item.title}}</p>
-            <span claass="price">￥{{item.price}}</span>
-            <span class="sellnum">{{item.sellnum}}</span>
+            <span class="price">￥{{item.price}}</span>
+            <span class="sellnum">已售{{item.sellnum}}</span>
           </router-link>
         </div>
       </div>
-  
   </div>
 </template>
 
@@ -101,7 +102,6 @@ export default {
       this.index = res.data.articles;
     });
     this.$ajax.get("/list").then(res => {
-      console.log(res.data);
       this.list = res.data;
     });
   }
@@ -109,7 +109,12 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-
+toRem(val) {
+	return (ceil(val / 37.5 * 100) / 100)rem
+}
+.fa-search{
+  color:#bbb;
+}
 #shopheader {
   width:100%;
   z-index: 100;
@@ -118,18 +123,18 @@ export default {
   top: 0;
   ul {
     list-style: none;
-    min-height:60px;
+    min-height:35px;
+    border-radius :4px;
     display: flex;
     justify-content: space-around;
     padding: 4px 10px;
     #input-box {
-      background: #aaaaaa;
-      padding: 5px;
+      background: #eee;
+      padding: 8px;
       border: none;
       width: 80%;
-
       #Input {
-        background: #aaaaaa;
+        background: #eee;
         border: none;
         padding: 9px;
       }
@@ -137,16 +142,20 @@ export default {
 
     .fa-paper-plane {
       padding: 30px 30px 0 0;
+      font-size:toRem(16);
       &:after {
         content: '长沙市';
         display: inline-block;
         position: absolute;
-        left: 0;
-        top: 20px;
+        top:toRem(14px);
+        left:toRem(4px);
+        font-size:toRem(12px);
       }
     }
-    .fa-paper-plane{
-      padding-right:1rem;
+    .fa-shopping-cart{
+      position:relative;
+      top:10px;
+      left:3px;
     }
   }
 }
@@ -155,10 +164,8 @@ export default {
   margin-top: 60px;
   padding:0.3rem;
   box-sizing: border-box;
-  width: 10rem;
   .bar {
     overflow: hidden;
-
     .lable {
       float: left;
     }
@@ -173,28 +180,34 @@ export default {
   }
 
   .show {
-    height: 7rem;
+    height: toRem(320);
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
     font-size:16px;
     .single {
       display: inline-block;
-      width: 7rem;
-      height: 2.2rem;
+      width: toRem(300);
+      height: toRem(100);
       section {
         display: inline-block;
-        margin-top:1rem;
+        vertical-align:top;
+        color:red;
+        .tit{
+          color:#000
+        }
       }
       img {
-        width: 2rem;
-        height: 2rem;
+        width: toRem(100);
+        height: toRem(100);
         border-radius: 0.2rem;
       }
     }
   }
 }
-
+.shop-list{
+  margin-bottom:100px;
+}
 .single-list {
   width: 5rem;
   display: inline-block;
@@ -202,15 +215,16 @@ export default {
   box-sizing: border-box;
   img {
     width:4rem;
+    margin:0 0.5rem;
   }
-
   .price {
     color: red;
+    font-size :14px;
   }
-
   .sellnum {
     float: right;
     padding-right: 10px;
+    font-size:14px;
   }
 }
 </style>

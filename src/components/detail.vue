@@ -42,17 +42,19 @@
       <span class="price">￥{{this.info.price}}</span>
       <span class="red-box">每日限量优惠</span>
     </div>
+      <!-- <img :src="this.detailimg"> -->
+
     <!-- 页面footer -->
     <footer>
       <ul>
         <li>
-          <i class="fa fa-institution fa-2x"></i>
+          <i class="fa fa-institution"></i>
         </li>
         <li>
-          <i class="fa fa-comment-o fa-2x"></i>
+          <i class="fa fa-comment-o"></i>
         </li>
-        <li class="buy" @click="popupVisible = true">加入购物车</li>
-        <li class="buy">立即购买</li>
+        <li class="buy buy-cart" @click="popupVisible = true">加入购物车</li>
+        <li class="buy buy-now">立即购买</li>
       </ul>
     </footer>
     <!-- 加入购物车弹出框 -->
@@ -60,9 +62,12 @@
       <div class="shipping-cart">
         <div class="shop-num">
           <div class="prod-info">
-            <img v-bind:src="this.info.pic" style="width:100px">
-            <span>{{this.info.title.slice(0,this.info.title.length-1)}}</span>
-            <span>{{this.info.price}}</span>
+            <img v-bind:src="this.info.pic">
+            <section>
+              <span>{{this.info.title.slice(0,this.info.title.length-1)}}</span>
+              <span class="price">￥{{this.info.price}}</span>
+            </section>
+            
           </div>
           <hr>
           <div class="sort">
@@ -73,7 +78,7 @@
               :color="x.color"
               :key="index"
               @click.native="chooseType(x)"
-            >{{x.name}}{{x.color}}</mt-badge>
+            >{{x.name}}</mt-badge>
           </div>
           <hr>
           <div class="num">
@@ -179,9 +184,29 @@ export default {
 };
 </script>
 
-<style scoped>
-#detail{
-  font-size: 1rem;
+<style lang="stylus" scoped>
+toRem(val) {
+	return (ceil(val / 37.5 * 100) / 100)rem
+}
+.prod-info img{
+  width:toRem(100);
+  margin:toRem(8)
+}
+mt-badge{
+  margin:toRem(3);
+}
+section{
+  display:inline-block;
+  vertical-align :top;
+  margin:toRem(8);
+}
+hr{
+  border:0.5px solid #eee;
+}
+.mint-popup hr{
+  color:#bbb;
+  transform:scaleY(0.5);
+  margin:10px 5px;
 }
 #back {
   margin-left: 10px;
@@ -195,34 +220,39 @@ ul {
   display: inline-block;
 }
 li {
-  padding: 15px;
+  padding: toRem(15px);
   display: inline-block;
   vertical-align: bottom;
-  /* margin:0 auto; */
 }
 footer > ul {
   position: fixed;
   bottom: 0;
-  min-width:364px;
+}
+footer i{
+  font-size:toRem(28px);
 }
 .buy {
-  padding-left: 2rem;
-  padding-right: 2rem;
   text-align: center;
+  height: 40px;
+  line-height :40px;
   background: red;
   color: #fff;
-  height: 2rem;
+}
+.buy-cart{
+  width:toRem(100);
+}
+.buy-now{
+  width:toRem(94);
 }
 .info-bar {
   display: flex;
   justify-content: space-around;
 }
 .price {
-  display: inline-block;
+  display:block;
   color: red;
 }
-footer>.buy{
-}
+
 .mint-popup- {
   width: 100%;
   .picker-slot-wrapper,
