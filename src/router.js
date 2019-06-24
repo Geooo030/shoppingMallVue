@@ -8,7 +8,6 @@ import cart from './components/cart.vue'
 import search from './components/search.vue'
 import cartedit from './components/cartedit.vue'
 import login from './components/login.vue'
-import searchRes from './components/searchRes.vue'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -56,11 +55,7 @@ export default new Router({
     },{
       path:'/login',
       component:login
-    },{
-      path:'/searchRes',
-      component:searchRes
     }
-   
   ]
 })
 
